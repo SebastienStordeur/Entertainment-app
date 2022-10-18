@@ -14,6 +14,9 @@ module.exports = {
       semidarkblue: "#161D2F",
       white: "#FFFFFF",
     },
+    fontSize: {
+      11: ["11px", "14px"],
+    },
   },
   plugins: [
     function ({ addVariant }) {

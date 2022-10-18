@@ -1,13 +1,7 @@
 <template>
-  <the-header></the-header>
+  <h1>HOME</h1>
 </template>
 
 <script>
-import TheHeader from "../components/Layout/TheHeader.vue";
-
-export default {
-  components: {
-    TheHeader,
-  },
-};
+export default {};
 </script>
