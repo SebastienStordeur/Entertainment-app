@@ -1,5 +1,5 @@
 <template>
-  <h1 class="font-light text-xl text-white">TV Series</h1>
+  <h1 class="font-light text-xl text-white mb-6">TV Series</h1>
   <section
     id="series-section"
     class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
