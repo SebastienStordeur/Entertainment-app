@@ -12,7 +12,14 @@
   </h2>
   <section
     id="recommended-section"
-    class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 pb-8"
+    class="
+      grid grid-cols-2
+      md:grid-cols-3
+      lg:grid-cols-4
+      xl:grid-cols-5
+      gap-4
+      pb-8
+    "
   >
     <media-card
       v-for="media in recommendedMedias"
