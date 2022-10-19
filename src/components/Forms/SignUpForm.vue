@@ -1,7 +1,7 @@
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="bg-semidarkblue rounded-lg py-8 px-6 text-15"
+    class="bg-semidarkblue rounded-lg py-8 px-6"
   >
     <h1 class="text-3xl font-light text-white">Sign Up</h1>
     <div class="flex flex-col">
