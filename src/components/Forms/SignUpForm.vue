@@ -1,48 +1,83 @@
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="bg-semidarkblue rounded-lg py-8 px-6"
+    class="bg-semidarkblue rounded-lg py-8 px-6 max-w-[400px] mx-auto"
   >
-    <h1 class="text-3xl font-light text-white">Sign Up</h1>
-    <div class="flex flex-col">
-      <label for="email" class="text-15 text-white font-light opacity-50"
+    <h1 class="text-[32px] font-light text-white">Sign Up</h1>
+    <div class="flex flex-col mt-10">
+      <label for="email" class="ml-4 text-15 text-white font-light opacity-50"
         >Email address</label
       >
       <input
         id="email"
         type="email"
         name="email"
-        class="bg-semidarkblue border-b-greyblue"
+        class="
+          bg-semidarkblue
+          outline-none
+          px-4
+          text-white
+          border-b border-b-greyblue
+          h-9
+        "
         ref="email"
       />
     </div>
-    <div class="flex flex-col">
-      <label for="password" class="text-white font-light opacity-50"
+    <div class="flex flex-col mt-6">
+      <label
+        for="password"
+        class="ml-4 text-15 text-white font-light opacity-50"
         >Password</label
       >
       <input
         id="password"
         type="password"
         name="password"
-        class="bg-semidarkblue border-b-greyblue"
+        class="
+          bg-semidarkblue
+          outline-none
+          px-4
+          text-white
+          border-b border-b-greyblue
+          h-9
+        "
         ref="password"
       />
     </div>
-    <div class="flex flex-col">
-      <label for="repeat-password" class="text-white font-light opacity-50"
+    <div class="flex flex-col mt-6">
+      <label
+        for="repeat-password"
+        class="ml-4 text-15 text-white font-light opacity-50"
         >Repeat Password</label
       >
       <input
         id="repeat-password"
         type="password"
         name="repeat-password"
-        class="bg-semidarkblue border-b-greyblue border-b-2"
+        class="
+          bg-semidarkblue
+          outline-none
+          border-b
+          px-4
+          text-white
+          border-b-greyblue
+          h-9
+        "
         ref="repeat-psw"
       />
     </div>
     <button
       type="submit"
-      class="h-12 w-full bg-red text-white rounded-md border-none"
+      class="
+        h-12
+        w-full
+        bg-red
+        text-white
+        font-light
+        rounded-md
+        border-none
+        mt-10
+      "
     >
       Create an account
     </button>

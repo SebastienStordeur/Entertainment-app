@@ -39,7 +39,16 @@
     </div>
     <button
       type="submit"
-      class="h-12 w-full bg-red text-white rounded-md border-none mt-10"
+      class="
+        h-12
+        w-full
+        bg-red
+        text-white
+        font-light
+        rounded-md
+        border-none
+        mt-10
+      "
     >
       Login to your account
     </button>
