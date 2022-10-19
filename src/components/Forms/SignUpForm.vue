@@ -63,7 +63,7 @@
           border-b-greyblue
           h-9
         "
-        ref="repeat-psw"
+        ref="repeatpsw"
       />
     </div>
     <button
@@ -89,9 +89,38 @@
 </template>
 
 <script>
+import { collection, doc, setDoc } from "firebase/firestore";
+import { db } from "../../firebase/firebase-config.js";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 export default {
+  data() {
+    return {};
+  },
   methods: {
-    handleSubmit() {},
+    handleSubmit() {
+      const email = this.$refs.email.value;
+      const password = this.$refs.password.value;
+      const repeatpsw = this.$refs.repeatpsw.value;
+      const auth = getAuth();
+      const usersCollectionRef = collection(db, "users");
+
+      if (password !== repeatpsw) return;
+
+      createUserWithEmailAndPassword(auth, email, password).then(
+        async (user) => {
+          const userUid = user.user.uid;
+          const email = user.user.email;
+
+          console.log(userUid, email);
+          await setDoc(doc(usersCollectionRef, userUid), {
+            userUid,
+            email,
+            bookmarks: [],
+          });
+        }
+      );
+    },
   },
 };
 </script>
