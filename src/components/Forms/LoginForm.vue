@@ -1,5 +1,8 @@
 <template>
-  <form class="bg-semidarkblue rounded-lg py-8 px-6 max-w-[400px] mx-auto">
+  <form
+    @submit.prevent="handleSubmit"
+    class="bg-semidarkblue rounded-lg py-8 px-6 max-w-[400px] mx-auto"
+  >
     <h1 class="text-[32px] font-light text-white">Login</h1>
     <div class="flex flex-col mt-10">
       <label class="text-white opacity-50 font-light text-15 ml-4"
@@ -35,6 +38,7 @@
           outline-0
           text-white
         "
+        autocomplete="off"
       />
     </div>
     <button
@@ -58,3 +62,35 @@
     </div>
   </form>
 </template>
+
+<script>
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserLocalPersistence,
+} from "firebase/auth";
+
+export default {
+  data() {
+    return {
+      auth: getAuth(),
+    };
+  },
+  methods: {
+    handleSubmit() {
+      const email = this.$refs.email.value;
+      const password = this.$refs.password.value;
+      setPersistence(this.auth, browserLocalPersistence).then(() => {
+        signInWithEmailAndPassword(this.auth, email, password)
+          .then(() => {
+            console.log("OK LOGGED IN");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      });
+    },
+  },
+};
+</script>
