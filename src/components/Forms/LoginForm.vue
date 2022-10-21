@@ -1,7 +1,7 @@
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="bg-semidarkblue rounded-lg py-8 px-6 max-w-[400px] mx-auto"
+    class="bg-semidarkblue rounded-lg py-8 px-6 w-full max-w-[400px] mx-auto"
   >
     <h1 class="text-[32px] font-light text-white">Login</h1>
     <div class="flex flex-col mt-10">
@@ -17,6 +17,7 @@
           bg-semidarkblue
           px-4
           border-b border-greyblue
+          focus:border-b-2
           outline-0
           text-white
         "
@@ -34,6 +35,7 @@
           h-9
           bg-semidarkblue
           border-b border-greyblue
+          focus:border-b-2
           px-4
           outline-0
           text-white

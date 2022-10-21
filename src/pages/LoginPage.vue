@@ -1,5 +1,10 @@
 <template>
-  <login-form></login-form>
+  <section
+    id="signup-section"
+    class="w-full h-full flex justify-center items-center main"
+  >
+    <login-form></login-form>
+  </section>
 </template>
 
 <script>

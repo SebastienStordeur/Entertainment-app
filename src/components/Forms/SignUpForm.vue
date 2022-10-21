@@ -1,7 +1,7 @@
 <template>
   <form
     @submit.prevent="handleSubmit"
-    class="bg-semidarkblue rounded-lg py-8 px-6 max-w-[400px] mx-auto"
+    class="bg-semidarkblue rounded-lg py-8 px-6 w-full max-w-[400px] mx-auto"
   >
     <h1 class="text-[32px] font-light text-white">Sign Up</h1>
     <div class="flex flex-col mt-10">
@@ -18,6 +18,7 @@
           px-4
           text-white
           border-b border-b-greyblue
+          focus:border-b-2
           h-9
         "
         ref="email"
@@ -45,6 +46,7 @@
           px-4
           text-white
           border-b border-b-greyblue
+          focus:border-b-2
           h-9
         "
         ref="password"
@@ -72,6 +74,7 @@
           text-white
           border-b-greyblue
           h-9
+          focus:border-b-2
         "
         ref="repeatpsw"
         autocomplete="off"
@@ -203,6 +206,9 @@ export default {
               bookmarks: [],
             });
             this.accountCreated = true;
+            this.$refs.email.value = "";
+            this.$refs.password.value = "";
+            this.$refs.repeatpsw.value = "";
           })
           .catch((error) => {
             error.message === "Firebase: Error (auth/email-already-in-use)."
