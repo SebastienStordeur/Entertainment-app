@@ -9,11 +9,16 @@
 import TheHeader from "./components/Layout/TheHeader.vue";
 
 export default {
+  data() {
+    return {};
+  },
   components: {
     TheHeader,
   },
 };
 </script>
+
+
 
 <style>
 @import "./style.css";

@@ -58,6 +58,21 @@
     >
       Login to your account
     </button>
+    <div
+      v-if="formHasError"
+      class="
+        flex
+        justify-center
+        items-center
+        h-12
+        mt-2
+        w-full
+        bg-red
+        text-white
+      "
+    >
+      Wrong email/password combination
+    </div>
     <div class="flex justify-center text-15 mt-6 font-light">
       <p class="text-white">Don't have an account? &nbsp;</p>
       <a href="/signup" class="text-red cursor-pointer">Sign Up</a>
@@ -77,6 +92,7 @@ export default {
   data() {
     return {
       auth: getAuth(),
+      formHasError: false,
     };
   },
   methods: {
@@ -86,10 +102,10 @@ export default {
       setPersistence(this.auth, browserLocalPersistence).then(() => {
         signInWithEmailAndPassword(this.auth, email, password)
           .then(() => {
-            console.log("OK LOGGED IN");
+            return this.$router.push("/");
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(() => {
+            this.formHasError = true;
           });
       });
     },
