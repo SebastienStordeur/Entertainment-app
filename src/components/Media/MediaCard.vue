@@ -18,23 +18,7 @@
           class="h-full w-full absolute object-cover"
         />
       </picture>
-      <button
-        class="
-          flex
-          justify-center
-          items-center
-          absolute
-          bg-darkblue
-          w-8
-          h-8
-          bg-opacity-50
-          rounded-full
-          top-2
-          right-2
-        "
-      >
-        <img src="../../assets/icon-bookmark-empty.svg" alt="bookmark" />
-      </button>
+      <bookmark-button></bookmark-button>
     </div>
     <div
       class="flex children:pr-3 font-light text-11 md:text-13 opacity-75 mt-2"
@@ -54,9 +38,13 @@
 </template>
 
 <script>
+import BookmarkButton from "./BookmarkButton.vue";
 export default {
   props: ["media"],
-  methods: {},
+  components: {
+    BookmarkButton,
+  },
+  data() {},
 };
 </script>
 

@@ -36,8 +36,8 @@
         </router-link>
       </li>
       <li>
-        <router-link :to="'/bookmarks'"
-          ><img
+        <router-link :to="'/bookmarks'">
+          <img
             src="../../assets/bookmark.svg"
             alt="Home"
             class="md:w-5 md:h-5"
@@ -45,7 +45,11 @@
         </router-link>
       </li>
     </ul>
-    <div class="rounded-full w-6 h-6 md:h-8 md:w-8 bg-greyblue"></div>
+    <div>
+      <router-link :to="'/login'">
+        <button class="bg-red text-white h-12 w-24 px-4 rounded">Login</button>
+      </router-link>
+    </div>
   </nav>
 </template>
 

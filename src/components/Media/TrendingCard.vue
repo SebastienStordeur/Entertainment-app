@@ -10,23 +10,7 @@
       overflow-hidden
     "
   >
-    <button
-      class="
-        flex
-        justify-center
-        items-center
-        absolute
-        w-8
-        h-8
-        rounded-full
-        top-2
-        right-2
-        z-10
-        bg-darkblue bg-opacity-50
-      "
-    >
-      <img src="../../assets/icon-bookmark-empty.svg" alt="Bookmark" />
-    </button>
+    <bookmark-button></bookmark-button>
     <picture>
       <source
         :srcset="media.thumbnail.trending.large"
@@ -69,10 +53,11 @@
 </template>
 
 <script>
+import BookmarkButton from "./BookmarkButton.vue";
 export default {
   props: ["media"],
-  created() {
-    console.log(this.media);
+  components: {
+    BookmarkButton,
   },
 };
 </script>
