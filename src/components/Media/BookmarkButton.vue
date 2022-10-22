@@ -21,6 +21,11 @@
       src="../../assets/icon-bookmark-empty.svg"
       alt="bookmark"
     />
+    <img
+      v-if="isBookmarked"
+      src="../../assets/icon-bookmark-full.svg"
+      alt="bookmark"
+    />
   </button>
 </template>
 
