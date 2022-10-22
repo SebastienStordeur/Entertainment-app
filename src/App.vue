@@ -9,9 +9,6 @@
 import TheHeader from "./components/Layout/TheHeader.vue";
 
 export default {
-  data() {
-    return {};
-  },
   components: {
     TheHeader,
   },

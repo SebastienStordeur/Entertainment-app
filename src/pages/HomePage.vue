@@ -23,7 +23,7 @@
   >
     <media-card
       v-for="media in recommendedMedias"
-      :key="media.id"
+      :key="media.title"
       :media="media"
     ></media-card>
   </section>

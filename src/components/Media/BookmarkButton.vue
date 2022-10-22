@@ -1,6 +1,6 @@
 <template>
   <button
-    @click="toggleBookmark"
+    @click="$emit('click')"
     class="
       flex
       justify-center
@@ -31,15 +31,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      isBookmarked: false,
-    };
-  },
-  methods: {
-    toggleBookmark() {
-      this.isBookmarked = !this.isBookmarked;
-    },
-  },
+  props: ["isBookmarked"],
 };
 </script>

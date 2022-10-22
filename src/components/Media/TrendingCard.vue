@@ -10,7 +10,10 @@
       overflow-hidden
     "
   >
-    <bookmark-button></bookmark-button>
+    <bookmark-button
+      v-if="isAuthenticated"
+      :isBookmarked="isBookmarked"
+    ></bookmark-button>
     <picture>
       <source
         :srcset="media.thumbnail.trending.large"
@@ -75,11 +78,10 @@ export default {
       isBookmarked: false,
     };
   },
-  onMounted() {
+  beforeMount() {
     onAuthStateChanged(this.auth, (user) => {
       if (user !== null) {
         this.isAuthenticated = true;
-        console.log(this.isAuthenticated);
         const userRef = doc(db, "users", user.uid);
         const userSnap = getDoc(userRef);
 

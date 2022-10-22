@@ -18,7 +18,10 @@
           class="h-full w-full absolute object-cover"
         />
       </picture>
-      <bookmark-button></bookmark-button>
+      <bookmark-button
+        :isBookmarked="isBookmarked"
+        @click="toggleMovie"
+      ></bookmark-button>
     </div>
     <div
       class="flex children:pr-3 font-light text-11 md:text-13 opacity-75 mt-2"
@@ -38,13 +41,64 @@
 </template>
 
 <script>
+import { db } from "@/firebase/firebase-config";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import {
+  arrayRemove,
+  arrayUnion,
+  doc,
+  getDoc,
+  updateDoc,
+} from "firebase/firestore";
 import BookmarkButton from "./BookmarkButton.vue";
 export default {
   props: ["media"],
   components: {
     BookmarkButton,
   },
-  data() {},
+  data() {
+    return {
+      auth: getAuth(),
+      isAuthenticated: false,
+      isBookmarked: false,
+    };
+  },
+  methods: {
+    async toggleMovie() {
+      if (this.auth.currentUser !== null) {
+        const userDoc = doc(db, "users", this.auth.currentUser.uid);
+
+        if (!this.isBookmarked) {
+          await updateDoc(userDoc, {
+            bookmarks: arrayUnion(this.media),
+          }).then(() => (this.isBookmarked = true));
+        } else {
+          await updateDoc(userDoc, {
+            bookmarks: arrayRemove(this.media),
+          }).then(() => (this.isBookmarked = false));
+        }
+      }
+    },
+  },
+  beforeMount() {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user !== null) {
+        this.isAuthenticated = true;
+        const userRef = doc(db, "users", user.uid);
+        const userSnap = getDoc(userRef);
+
+        userSnap.then((res) => {
+          const data = res.data();
+          if (data !== undefined) {
+            const isFound = data.bookmarks.find(
+              (movie) => movie.title === this.media.title
+            );
+            isFound ? (this.isBookmarked = true) : (this.isBookmarked = false);
+          }
+        });
+      }
+    });
+  },
 };
 </script>
 
