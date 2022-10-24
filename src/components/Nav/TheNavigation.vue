@@ -50,7 +50,7 @@
         <button class="bg-red text-white h-12 w-24 px-4 rounded">Login</button>
       </router-link>
     </div>
-    <div v-if="isAuthenticated">
+    <div v-if="isAuthenticated" @click="logout">
       <img
         src="../../assets/logout.svg"
         alt="Logout"
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { onAuthStateChanged, getAuth } from "firebase/auth";
+import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 export default {
   data() {
     return {
@@ -75,6 +75,13 @@ export default {
         ? (this.isAuthenticated = true)
         : (this.isAuthenticated = false);
     });
+  },
+  methods: {
+    logout() {
+      signOut(this.auth).then(() => {
+        this.isAuthenticated = false;
+      });
+    },
   },
 };
 </script>
