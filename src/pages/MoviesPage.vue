@@ -1,5 +1,12 @@
 <template>
-  <h1 class="font-light text-xl text-white mb-6">Movies</h1>
+  <search-bar :placeholder="'Search for movies'" @input="filterMovies">
+  </search-bar>
+  <h1
+    class="font-light text-xl text-white mb-6"
+    v-if="searchValue.length === 0"
+  >
+    Movies
+  </h1>
   <section
     id="movies-section"
     class="
@@ -21,17 +28,35 @@
 
 
 <script>
+import SearchBar from "../components/Search/SearchBar.vue";
 import MediaCard from "../components/Media/MediaCard.vue";
 import Medias from "../data/data.json";
 
 export default {
   components: {
     MediaCard,
+    SearchBar,
   },
   data() {
     return {
+      searchValue: "",
       medias: Medias.filter((media) => media.category === "Movie"),
     };
+  },
+  methods: {
+    filterMovies(event) {
+      this.searchValue = event.target.value;
+      if (this.searchValue.length > 0) {
+        this.medias = Medias.filter(
+          (media) =>
+            media.category === "Movie" &&
+            media.title.toLowerCase().includes(this.searchValue.toLowerCase())
+        );
+      } else {
+        this.medias = Medias.filter((media) => media.category === "Movie");
+      }
+      return this.medias;
+    },
   },
 };
 </script>
