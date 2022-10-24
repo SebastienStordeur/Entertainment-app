@@ -50,6 +50,13 @@
         <button class="bg-red text-white h-12 w-24 px-4 rounded">Login</button>
       </router-link>
     </div>
+    <div v-if="isAuthenticated">
+      <img
+        src="../../assets/logout.svg"
+        alt="Logout"
+        class="h-6 w-6 cursor-pointer"
+      />
+    </div>
   </nav>
 </template>
 

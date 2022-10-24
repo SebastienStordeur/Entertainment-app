@@ -1,6 +1,6 @@
 <template>
   <the-header></the-header>
-  <main id="main" class="bg-darkblue w-full px-4 md:px-6 main relative">
+  <main id="main" class="bg-darkblue w-full px-4 md:px-6 py-6 main relative">
     <router-view></router-view>
   </main>
 </template>
