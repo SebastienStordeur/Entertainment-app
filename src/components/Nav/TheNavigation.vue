@@ -45,11 +45,30 @@
         </router-link>
       </li>
     </ul>
-    <div>
+    <div v-if="!isAuthenticated">
       <router-link :to="'/login'">
         <button class="bg-red text-white h-12 w-24 px-4 rounded">Login</button>
       </router-link>
     </div>
   </nav>
 </template>
+
+<script>
+import { onAuthStateChanged, getAuth } from "firebase/auth";
+export default {
+  data() {
+    return {
+      isAuthenticated: false,
+      auth: getAuth(),
+    };
+  },
+  beforeMount() {
+    onAuthStateChanged(this.auth, (user) => {
+      user !== null
+        ? (this.isAuthenticated = true)
+        : (this.isAuthenticated = false);
+    });
+  },
+};
+</script>
 

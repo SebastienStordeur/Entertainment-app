@@ -1,5 +1,6 @@
 <template>
   <header
+    id="header"
     class="
       w-full
       h-14
