@@ -7,6 +7,19 @@
   >
     Movies
   </h1>
+
+  <h2
+    v-if="searchValue.length > 0 && medias.length > 1"
+    class="font-light text-xl text-white mb-6"
+  >
+    Found {{ medias.length }} results for ‘{{ searchValue }}’
+  </h2>
+  <h2
+    v-if="searchValue.length > 0 && medias.length <= 1"
+    class="font-light text-xl text-white mb-6"
+  >
+    Found {{ medias.length }} result for ‘{{ searchValue }}’
+  </h2>
   <section
     id="movies-section"
     class="
@@ -20,7 +33,7 @@
   >
     <media-card
       v-for="media in medias"
-      :key="media.id"
+      :key="media.title"
       :media="media"
     ></media-card>
   </section>
