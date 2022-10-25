@@ -13,6 +13,7 @@
     <bookmark-button
       v-if="isAuthenticated"
       :isBookmarked="isBookmarked"
+      @click="toggleMovie"
     ></bookmark-button>
     <picture>
       <source
@@ -78,6 +79,23 @@ export default {
       isBookmarked: false,
     };
   },
+  methods: {
+    async toggleMovie() {
+      if (this.auth.currentUser !== null) {
+        const userDoc = doc(db, "users", this.auth.currentUser.uid);
+
+        if (!this.isBookmarked) {
+          await updateDoc(userDoc, {
+            bookmarks: arrayUnion(this.media),
+          }).then(() => (this.isBookmarked = true));
+        } else {
+          await updateDoc(userDoc, {
+            bookmarks: arrayRemove(this.media),
+          }).then(() => (this.isBookmarked = false));
+        }
+      }
+    },
+  },
   beforeMount() {
     onAuthStateChanged(this.auth, (user) => {
       if (user !== null) {
@@ -96,24 +114,6 @@ export default {
         });
       }
     });
-  },
-  methods: {
-    async addMovieToBookmarks() {
-      if (this.auth.currentUser !== null) {
-        const userDoc = doc(db, "users", this.auth.currentUser.uid);
-        await updateDoc(userDoc, {
-          bookmarks: arrayUnion(this.media),
-        }).then(() => (this.isBookmarked = true));
-      }
-    },
-    async removeMovieFromBookmarks() {
-      if (this.auth.currentUser !== null) {
-        const userDoc = doc(db, "users", this.auth.currentUser.uid);
-        await updateDoc(userDoc, {
-          bookmarks: arrayRemove(this.media),
-        }).then(() => (this.isBookmarked = false));
-      }
-    },
   },
 };
 </script>

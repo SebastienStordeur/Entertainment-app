@@ -35,7 +35,7 @@
           />
         </router-link>
       </li>
-      <li>
+      <li v-if="isAuthenticated">
         <router-link :to="'/bookmarks'">
           <img
             src="../../assets/bookmark.svg"
@@ -46,9 +46,9 @@
       </li>
     </ul>
     <div v-if="!isAuthenticated">
-      <router-link :to="'/login'">
+      <a href="/login">
         <button class="bg-red text-white h-12 w-24 px-4 rounded">Login</button>
-      </router-link>
+      </a>
     </div>
     <div v-if="isAuthenticated" @click="logout">
       <img

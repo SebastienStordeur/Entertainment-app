@@ -1,5 +1,7 @@
 <template>
-  <h2 class="font-light text-[20px] text-white">Bookmarked Movies</h2>
+  <h2 class="font-light text-[20px] text-white" v-if="movies.length >= 1">
+    Bookmarked Movies
+  </h2>
   <section
     class="
       grid grid-cols-2
@@ -10,6 +12,7 @@
       pb-8
       mt-6
     "
+    v-if="movies.length >= 1"
   >
     <media-card
       v-for="movie in movies"
@@ -17,7 +20,9 @@
       :media="movie"
     ></media-card>
   </section>
-  <h2 class="font-light text-[20px] text-white">Bookmarked TV Series</h2>
+  <h2 class="font-light text-[20px] text-white" v-if="series.length >= 1">
+    Bookmarked TV Series
+  </h2>
   <section
     class="
       grid grid-cols-2
