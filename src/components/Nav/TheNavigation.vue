@@ -10,7 +10,7 @@
       bg-semidarkblue
     "
   >
-    <img src="/assets/logo.svg" alt="Logo" class="w-6 h-5 md:w-8 md:h-6" />
+    <img src="../../assets/logo.svg" alt="Logo" class="w-6 h-5 md:w-8 md:h-6" />
     <ul class="flex children:px-3 children:cursor-pointer">
       <li>
         <router-link to="/"

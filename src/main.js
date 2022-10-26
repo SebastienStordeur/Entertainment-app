@@ -16,7 +16,17 @@ const router = createRouter({
     { path: "/movies", component: MoviesPage, name: "Movies" },
     { path: "/series", component: SeriesPage, name: "Series" },
     { path: "/bookmarks", component: BookmarkPage, name: "Bookmarks" },
-    { path: "/signup", component: SignUp, name: "Signup" },
+    {
+      path: "/signup",
+      component: SignUp,
+      name: "Signup",
+      beforeEnter: () => {
+        const isAuthenticated = false;
+        if (isAuthenticated) {
+          return { name: "Home" };
+        }
+      },
+    },
     { path: "/login", component: LoginPage, name: "Login" },
   ],
   linkActiveClass: "brightness-300",
