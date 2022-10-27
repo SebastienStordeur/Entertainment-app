@@ -11,12 +11,12 @@
     "
     :type="type"
     :name="name"
-    :ref="name"
+    :ref="inputRef"
   />
 </template>
 
 <script>
 export default {
-  props: ["type", "name"],
+  props: ["type", "name", "inputRef"],
 };
 </script>

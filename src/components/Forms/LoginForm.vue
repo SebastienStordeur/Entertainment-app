@@ -6,16 +6,47 @@
     <h1 class="text-[32px] font-light text-white">Login</h1>
     <div class="flex flex-col mt-10">
       <form-label forInput="email" label="Email Address" />
-      <base-input type="email" name="email" ref="email" />
+      <!-- <base-input type="email" name="email" inputRef="email" /> -->
+      <input
+        id="email"
+        type="email"
+        name="email"
+        class="
+          bg-semidarkblue
+          outline-none
+          px-4
+          text-white
+          border-b border-b-greyblue
+          focus:border-b-2
+          h-9
+        "
+        ref="email"
+      />
     </div>
     <div class="flex flex-col mt-6">
       <form-label forInput="password" label="Password"></form-label>
-      <base-input
+      <input
+        id="password"
+        type="password"
+        name="password"
+        class="
+          bg-semidarkblue
+          outline-none
+          px-4
+          text-white
+          border-b border-b-greyblue
+          focus:border-b-2
+          h-9
+        "
+        ref="password"
+        autocomplete="off"
+      />
+      <!--       <base-input
         type="password"
         name="password"
         ref="password"
         autocomplete="off"
-      />
+      /> -->
     </div>
     <base-button type="submit">Login to your account</base-button>
     <login-error v-if="formHasError"></login-error>
@@ -35,14 +66,14 @@ import {
 } from "firebase/auth";
 
 import FormLabel from "./FormLabel.vue";
-import BaseInput from "../UI/BaseInput.vue";
+/* import BaseInput from "../UI/BaseInput.vue"; */
 import BaseButton from "../UI/BaseButton.vue";
 import LoginError from "./Errors/LoginError.vue";
 
 export default {
   components: {
     FormLabel,
-    BaseInput,
+    /* BaseInput, */
     BaseButton,
     LoginError,
   },
@@ -56,7 +87,6 @@ export default {
     handleSubmit() {
       const email = this.$refs.email.value;
       const password = this.$refs.password.value;
-      console.log(email);
       setPersistence(this.auth, browserLocalPersistence).then(() => {
         signInWithEmailAndPassword(this.auth, email, password)
           .then(() => {
