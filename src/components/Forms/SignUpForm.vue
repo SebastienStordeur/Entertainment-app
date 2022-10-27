@@ -21,12 +21,11 @@
         "
         ref="email"
       />
-      <p v-if="emailHasError" class="font-bold text-red text-13">
-        {{ emailMsgError }}
-      </p>
-      <p v-if="emailIsUsed" class="font-bold text-red text-13">
-        Email already used
-      </p>
+      <email-errors
+        :emailHasError="emailHasError"
+        :emailIsUsed="emailIsUsed"
+        :message="emailMsgError"
+      />
     </div>
     <div class="flex flex-col mt-6">
       <form-label for="password" label="Password" />
@@ -46,16 +45,10 @@
         ref="password"
         autocomplete="off"
       />
-      <p v-if="passwordHasError" class="font-bold text-red text-13">
-        {{ passwordMsgError }}
-      </p>
+      <password-error v-if="passwordHasError" :message="passwordMsgError" />
     </div>
     <div class="flex flex-col mt-6">
-      <label
-        for="repeat-password"
-        class="ml-4 text-15 text-white font-light opacity-50"
-        >Repeat Password</label
-      >
+      <form-label for="repeat-password" label="Repeat Password" />
       <input
         id="repeat-password"
         type="password"
@@ -73,15 +66,12 @@
         ref="repeatpsw"
         autocomplete="off"
       />
-      <p v-if="confirmPswHasError" class="font-bold text-red text-13">
-        {{ confirmPswMsgError }}
-      </p>
-      <p
-        v-if="!confirmPswHasError && passwordsHaveError"
-        class="font-bold text-red text-13"
-      >
-        {{ passwordsMsgError }}
-      </p>
+      <passwords-errors
+        :hasError="confirmPswHasError"
+        :passwordsHaveError="passwordsHaveError"
+        :message="confirmPswMsgError"
+        :passwordsMsg="passwordsMsgError"
+      />
     </div>
     <button
       type="submit"
@@ -114,9 +104,12 @@ import { db } from "../../firebase/firebase-config.js";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 import FormLabel from "./FormLabel.vue";
+import EmailErrors from "./Errors/EmailErrors.vue";
+import PasswordError from "./Errors/PasswordError.vue";
+import PasswordsErrors from "./Errors/PasswordsErrors.vue";
 
 export default {
-  components: { FormLabel },
+  components: { FormLabel, EmailErrors, PasswordError, PasswordsErrors },
   data() {
     return {
       emailRegex:
@@ -208,6 +201,7 @@ export default {
             this.$refs.repeatpsw.value = "";
           })
           .catch((error) => {
+            console.log(error.message);
             error.message === "Firebase: Error (auth/email-already-in-use)."
               ? (this.emailIsUsed = true)
               : (this.emailIsUsed = false);
