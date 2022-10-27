@@ -1,7 +1,5 @@
 <template>
   <input
-    :type="type"
-    :name="name"
     class="
       h-9
       bg-semidarkblue
@@ -11,14 +9,14 @@
       outline-0
       text-white
     "
+    :type="type"
+    :name="name"
+    :ref="name"
   />
 </template>
 
 <script>
 export default {
-  props: ["type", "name", "refInput"],
-  beforeMount() {
-    console.log(this.refInput, this.name);
-  },
+  props: ["type", "name"],
 };
 </script>

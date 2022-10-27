@@ -73,21 +73,7 @@
         :passwordsMsg="passwordsMsgError"
       />
     </div>
-    <button
-      type="submit"
-      class="
-        h-12
-        w-full
-        bg-red
-        text-white
-        font-light
-        rounded-md
-        border-none
-        mt-10
-      "
-    >
-      Create an account
-    </button>
+    <base-button type="submit">Create an account</base-button>
     <div class="text-white flex justify-center" v-if="accountCreated">
       Account created successfully
     </div>
@@ -107,9 +93,16 @@ import FormLabel from "./FormLabel.vue";
 import EmailErrors from "./Errors/EmailErrors.vue";
 import PasswordError from "./Errors/PasswordError.vue";
 import PasswordsErrors from "./Errors/PasswordsErrors.vue";
+import BaseButton from "../UI/BaseButton.vue";
 
 export default {
-  components: { FormLabel, EmailErrors, PasswordError, PasswordsErrors },
+  components: {
+    FormLabel,
+    EmailErrors,
+    PasswordError,
+    PasswordsErrors,
+    BaseButton,
+  },
   data() {
     return {
       emailRegex:

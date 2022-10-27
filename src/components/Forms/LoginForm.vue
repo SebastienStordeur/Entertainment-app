@@ -18,12 +18,7 @@
       />
     </div>
     <base-button type="submit">Login to your account</base-button>
-    <div
-      v-if="formHasError"
-      class="flex justify-center items-center h-12 mt-2 w-full text-red"
-    >
-      Wrong email/password combination
-    </div>
+    <login-error v-if="formHasError"></login-error>
     <div class="flex justify-center text-15 mt-6 font-light">
       <p class="text-white">Don't have an account? &nbsp;</p>
       <a href="/signup" class="text-red cursor-pointer">Sign Up</a>
@@ -42,12 +37,14 @@ import {
 import FormLabel from "./FormLabel.vue";
 import BaseInput from "../UI/BaseInput.vue";
 import BaseButton from "../UI/BaseButton.vue";
+import LoginError from "./Errors/LoginError.vue";
 
 export default {
   components: {
     FormLabel,
     BaseInput,
     BaseButton,
+    LoginError,
   },
   data() {
     return {
