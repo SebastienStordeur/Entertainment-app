@@ -5,9 +5,7 @@
   >
     <h1 class="text-[32px] font-light text-white">Sign Up</h1>
     <div class="flex flex-col mt-10">
-      <label for="email" class="ml-4 text-15 text-white font-light opacity-50"
-        >Email address</label
-      >
+      <form-label for="email" label="Email Address" />
       <input
         id="email"
         type="email"
@@ -31,11 +29,7 @@
       </p>
     </div>
     <div class="flex flex-col mt-6">
-      <label
-        for="password"
-        class="ml-4 text-15 text-white font-light opacity-50"
-        >Password</label
-      >
+      <form-label for="password" label="Password" />
       <input
         id="password"
         type="password"
@@ -119,7 +113,10 @@ import { collection, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase/firebase-config.js";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
+import FormLabel from "./FormLabel.vue";
+
 export default {
+  components: { FormLabel },
   data() {
     return {
       emailRegex:

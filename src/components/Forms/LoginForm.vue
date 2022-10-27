@@ -5,71 +5,22 @@
   >
     <h1 class="text-[32px] font-light text-white">Login</h1>
     <div class="flex flex-col mt-10">
-      <label class="text-white opacity-50 font-light text-15 ml-4"
-        >Email Address</label
-      >
-      <input
-        type="email"
-        name="email"
-        ref="email"
-        class="
-          h-9
-          bg-semidarkblue
-          px-4
-          border-b border-greyblue
-          focus:border-b-2
-          outline-0
-          text-white
-        "
-      />
+      <form-label forInput="email" label="Email Address" />
+      <base-input type="email" name="email" ref="email" />
     </div>
     <div class="flex flex-col mt-6">
-      <label class="text-white opacity-50 font-light text-15 ml-4"
-        >Password</label
-      >
-      <input
+      <form-label forInput="password" label="Password"></form-label>
+      <base-input
         type="password"
         name="password"
         ref="password"
-        class="
-          h-9
-          bg-semidarkblue
-          border-b border-greyblue
-          focus:border-b-2
-          px-4
-          outline-0
-          text-white
-        "
         autocomplete="off"
       />
     </div>
-    <button
-      type="submit"
-      class="
-        h-12
-        w-full
-        bg-red
-        text-white
-        font-light
-        rounded-md
-        border-none
-        mt-10
-      "
-    >
-      Login to your account
-    </button>
+    <base-button type="submit">Login to your account</base-button>
     <div
       v-if="formHasError"
-      class="
-        flex
-        justify-center
-        items-center
-        h-12
-        mt-2
-        w-full
-        bg-red
-        text-white
-      "
+      class="flex justify-center items-center h-12 mt-2 w-full text-red"
     >
       Wrong email/password combination
     </div>
@@ -88,7 +39,16 @@ import {
   browserLocalPersistence,
 } from "firebase/auth";
 
+import FormLabel from "./FormLabel.vue";
+import BaseInput from "../UI/BaseInput.vue";
+import BaseButton from "../UI/BaseButton.vue";
+
 export default {
+  components: {
+    FormLabel,
+    BaseInput,
+    BaseButton,
+  },
   data() {
     return {
       auth: getAuth(),
@@ -99,6 +59,7 @@ export default {
     handleSubmit() {
       const email = this.$refs.email.value;
       const password = this.$refs.password.value;
+      console.log(email);
       setPersistence(this.auth, browserLocalPersistence).then(() => {
         signInWithEmailAndPassword(this.auth, email, password)
           .then(() => {
