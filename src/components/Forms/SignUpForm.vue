@@ -6,20 +6,11 @@
     <h1 class="text-[32px] font-light text-white">Sign Up</h1>
     <div class="flex flex-col mt-10">
       <form-label for="email" label="Email Address" />
-      <input
-        id="email"
-        type="email"
-        name="email"
-        class="
-          bg-semidarkblue
-          outline-none
-          px-4
-          text-white
-          border-b border-b-greyblue
-          focus:border-b-2
-          h-9
-        "
-        ref="email"
+      <base-input
+        :type="'email'"
+        :name="'email'"
+        :value="emailValue"
+        @update:value="(newValue) => (emailValue = newValue)"
       />
       <email-errors
         :emailHasError="emailHasError"
@@ -29,42 +20,21 @@
     </div>
     <div class="flex flex-col mt-6">
       <form-label for="password" label="Password" />
-      <input
-        id="password"
-        type="password"
-        name="password"
-        class="
-          bg-semidarkblue
-          outline-none
-          px-4
-          text-white
-          border-b border-b-greyblue
-          focus:border-b-2
-          h-9
-        "
-        ref="password"
-        autocomplete="off"
+      <base-input
+        :type="'password'"
+        :name="'password'"
+        :value="passwordValue"
+        @update:value="(newValue) => (passwordValue = newValue)"
       />
       <password-error v-if="passwordHasError" :message="passwordMsgError" />
     </div>
     <div class="flex flex-col mt-6">
       <form-label for="repeat-password" label="Repeat Password" />
-      <input
-        id="repeat-password"
-        type="password"
-        name="repeat-password"
-        class="
-          bg-semidarkblue
-          outline-none
-          border-b
-          px-4
-          text-white
-          border-b-greyblue
-          h-9
-          focus:border-b-2
-        "
-        ref="repeatpsw"
-        autocomplete="off"
+      <base-input
+        :type="'password'"
+        :name="'repeat-password'"
+        :value="repeatPasswordValue"
+        @update:value="(newValue) => (repeatPasswordValue = newValue)"
       />
       <passwords-errors
         :hasError="confirmPswHasError"
@@ -94,6 +64,7 @@ import EmailErrors from "./Errors/EmailErrors.vue";
 import PasswordError from "./Errors/PasswordError.vue";
 import PasswordsErrors from "./Errors/PasswordsErrors.vue";
 import BaseButton from "../UI/BaseButton.vue";
+import BaseInput from "../UI/BaseInput.vue";
 
 export default {
   components: {
@@ -102,9 +73,13 @@ export default {
     PasswordError,
     PasswordsErrors,
     BaseButton,
+    BaseInput,
   },
   data() {
     return {
+      emailValue: "",
+      passwordValue: "",
+      repeatPasswordValue: "",
       emailRegex:
         /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i,
       emailHasError: false,
@@ -162,9 +137,11 @@ export default {
       }
     },
     handleSubmit() {
-      const email = this.$refs.email.value;
-      const password = this.$refs.password.value;
-      const confirmPassword = this.$refs.repeatpsw.value;
+      const email = this.emailValue;
+      const password = this.passwordValue;
+      const confirmPassword = this.repeatPasswordValue;
+
+      console.log(email, password, confirmPassword);
       const usersCollectionRef = collection(db, "users");
       this.accountCreated = false;
 
@@ -189,9 +166,10 @@ export default {
               bookmarks: [],
             });
             this.accountCreated = true;
-            this.$refs.email.value = "";
-            this.$refs.password.value = "";
-            this.$refs.repeatpsw.value = "";
+            this.emailValue = "";
+            this.passwordValue = "";
+            this.repeatPasswordValue = "";
+            return this.$router.push("/");
           })
           .catch((error) => {
             console.log(error.message);
