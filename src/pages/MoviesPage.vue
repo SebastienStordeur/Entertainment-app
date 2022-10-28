@@ -1,6 +1,5 @@
 <template>
-  <search-bar :placeholder="'Search for movies'" @input="filterMovies">
-  </search-bar>
+  <search-bar :placeholder="'Search for movies'" @input="filterMovies" />
   <search-results
     :title="'Movies'"
     :searchValue="searchValue"

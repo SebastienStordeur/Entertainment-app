@@ -11,12 +11,15 @@
     "
     :type="type"
     :name="name"
-    :ref="inputRef"
+    autocomplete
+    :value="value"
+    @input="$emit('update:value', $event.target.value)"
   />
 </template>
 
 <script>
 export default {
-  props: ["type", "name", "inputRef"],
+  emits: ["update:value"],
+  props: ["type", "name", "value"],
 };
 </script>

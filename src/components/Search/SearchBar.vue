@@ -23,6 +23,6 @@
 
 <script>
 export default {
-  props: ["searchValue", "placeholder"],
+  props: ["placeholder"],
 };
 </script>
