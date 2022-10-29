@@ -5,29 +5,20 @@
     :searchValue="searchValue"
     :results="medias.length"
   />
-  <section
-    id="movies-section"
-    class="
-      grid grid-cols-2
-      md:grid-cols-3
-      lg:grid-cols-4
-      xl:grid-cols-5
-      gap-4
-      md:gap-x-8 md:gap-y-6
-    "
-  >
+  <media-section id="movies-section">
     <media-card
       v-for="media in medias"
       :key="media.title"
       :media="media"
     ></media-card>
-  </section>
+  </media-section>
 </template>
 
 
 <script>
 import SearchBar from "../components/Search/SearchBar.vue";
 import SearchResults from "@/components/Search/SearchResults.vue";
+import MediaSection from "@/components/UI/MediaSection.vue";
 import MediaCard from "../components/Media/MediaCard.vue";
 import Medias from "../data/data.json";
 
@@ -36,6 +27,7 @@ export default {
     MediaCard,
     SearchBar,
     SearchResults,
+    MediaSection,
   },
   data() {
     return {

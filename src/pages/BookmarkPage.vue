@@ -3,6 +3,7 @@
     Bookmarked Movies
   </h2>
   <section
+    v-if="movies.length > 0"
     class="
       grid grid-cols-2
       md:grid-cols-3
@@ -12,7 +13,6 @@
       pb-8
       mt-6
     "
-    v-if="movies.length >= 1"
   >
     <media-card
       v-for="movie in movies"
@@ -24,6 +24,7 @@
     Bookmarked TV Series
   </h2>
   <section
+    v-if="series.length > 0"
     class="
       grid grid-cols-2
       md:grid-cols-3
@@ -40,6 +41,12 @@
       :media="serie"
     ></media-card>
   </section>
+  <p
+    v-if="series.length === 0 && movies.length === 0"
+    class="text-white text-center"
+  >
+    Nothing to display, add movies or series to your bookmarks first.
+  </p>
 </template>
 
 <script>
