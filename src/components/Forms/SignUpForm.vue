@@ -140,8 +140,6 @@ export default {
       const email = this.emailValue;
       const password = this.passwordValue;
       const confirmPassword = this.repeatPasswordValue;
-
-      console.log(email, password, confirmPassword);
       const usersCollectionRef = collection(db, "users");
       this.accountCreated = false;
 
@@ -172,7 +170,6 @@ export default {
             return this.$router.push("/");
           })
           .catch((error) => {
-            console.log(error.message);
             error.message === "Firebase: Error (auth/email-already-in-use)."
               ? (this.emailIsUsed = true)
               : (this.emailIsUsed = false);
