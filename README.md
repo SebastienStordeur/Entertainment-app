@@ -12,3 +12,7 @@ This is a small project made to learn basics of Vue. Authentification is provide
 Each user can create an account (no validation require except the basic email format and six characters long passwords), login, add and remove movies to his bookmarks and logout.
 
 Movies are provided by a JSON file.
+
+## Information
+
+In case the project would be cloned, create a firebase database and replace the informations in the firebase-config.js file.
