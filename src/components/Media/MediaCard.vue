@@ -1,38 +1,17 @@
 <template>
   <article class="min-w-40 lg:min-w-72 h-40 md:h-56 bg-darkblue text-white">
-    <div
-      class="relative rounded-lg overflow-hidden w-full h-28 md:h-36 lg:h-44"
-    >
+    <div class="relative rounded-lg overflow-hidden w-full h-28 md:h-36 lg:h-44">
       <picture>
-        <source
-          :srcset="media.thumbnail.regular.large"
-          media="(min-width:1024px)"
-        />
-        <source
-          :srcset="media.thumbnail.regular.medium"
-          media="(min-width:768px)"
-        />
-        <img
-          :src="media.thumbnail.regular.small"
-          :alt="media.title"
-          class="h-full w-full absolute object-cover"
-        />
+        <source :srcset="media.thumbnail.regular.large" media="(min-width:1024px)" />
+        <source :srcset="media.thumbnail.regular.medium" media="(min-width:768px)" />
+        <img :src="media.thumbnail.regular.small" :alt="media.title" class="h-full w-full absolute object-cover" />
       </picture>
-      <bookmark-button
-        :isBookmarked="isBookmarked"
-        @click="toggleMovie"
-      ></bookmark-button>
+      <bookmark-button v-if="isAuthenticated" :isBookmarked="isBookmarked" @click="toggleMovie"></bookmark-button>
     </div>
-    <div
-      class="flex children:pr-3 font-light text-11 md:text-13 opacity-75 mt-2"
-    >
+    <div class="flex children:pr-3 font-light text-11 md:text-13 opacity-75 mt-2">
       <span>{{ media.year }}</span>
       <span class="dot flex relative"
-        ><img
-          src="../../assets/movie-icon.svg"
-          alt="Movie icon"
-          class="mr-1"
-        />{{ media.category }}</span
+        ><img src="../../assets/movie-icon.svg" alt="Movie icon" class="mr-1" />{{ media.category }}</span
       >
       <span>{{ media.rating }}</span>
     </div>
@@ -43,13 +22,7 @@
 <script>
 import { db } from "@/firebase/firebase-config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-  arrayRemove,
-  arrayUnion,
-  doc,
-  getDoc,
-  updateDoc,
-} from "firebase/firestore";
+import { arrayRemove, arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import BookmarkButton from "./BookmarkButton.vue";
 export default {
   props: ["media"],
@@ -90,9 +63,7 @@ export default {
         userSnap.then((res) => {
           const data = res.data();
           if (data !== undefined) {
-            const isFound = data.bookmarks.find(
-              (movie) => movie.title === this.media.title
-            );
+            const isFound = data.bookmarks.find((movie) => movie.title === this.media.title);
             isFound ? (this.isBookmarked = true) : (this.isBookmarked = false);
           }
         });
